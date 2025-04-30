@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz da Sabrina Carpenter</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", cursive;
+      background-color: #fff0f5;
+      text-align: center;
+      padding: 30px;
+    }
+    .quiz-box {
+      background: #ffe4fa;
+      border-radius: 20px;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 10px #e0a3d3;
+    }
+    button {
+      background-color: #f4a8d6;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      color: white;
+    }
+    button:hover {
+      background-color: #e289c2;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-box">
+    <h1>Você é fã da Sabrina Carpenter?</h1>
+    <div id="quiz"></div>
+    <button onclick="showResult()" id="submitBtn">Ver resultado</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const quizData = [
+      { q: "Qual dessas músicas é da Sabrina?", a: "Feather" },
+      { q: "Em que série Sabrina ficou conhecida na Disney?", a: "Girl Meets World" },
+      { q: "Qual dessas é um álbum da Sabrina?", a: "emails I can’t send" },
+      { q: "Sabrina atuou em qual filme musical da Netflix?", a: "Work It" },
+      { q: "Qual dessas frases parece com a vibe da Sabrina?", a: "Sweet but sharp" },
+      { q: "Ela fez feat com qual artista em 'Almost Love (Remix)'?", a: "Jonas Blue" },
+      { q: "Qual dessas músicas fala sobre reencontro e timing?", a: "Skinny Dipping" },
+      { q: "Sabrina Carpenter também é...", a: "Atriz e compositora" },
+      { q: "Qual dessas músicas não é dela?", a: "Good 4 U" },
+      { q: "Sabrina já abriu turnê de qual artista?", a: "Taylor Swift" },
+      { q: "Qual cor combina com a estética da era 'Feather'?", a: "Rosa claro" },
+      { q: "Qual dessas músicas tem clipe com vibe de vingança fofa?", a: "Feather" },
+      { q: "Em que ano nasceu a Sabrina?", a: "1999" },
+      { q: "Qual dessas é uma letra dela?", a: "I'm so sorry for your loss, like you're not mine to lose" },
+      { q: "O que você sente ouvindo Sabrina?", a: "Tudo ao mesmo tempo e ainda linda" }
+    ];
+
+    let userScore = 0;
+    const quizDiv = document.getElementById("quiz");
+
+    quizData.forEach((item, index) => {
+      const questionDiv = document.createElement("div");
+      questionDiv.innerHTML = `<p><strong>${index + 1}. ${item.q}</strong></p>
+        <input type="text" id="q${index}" placeholder="Digite sua resposta aqui" style="padding:5px; border-radius:8px;">`;
+      quizDiv.appendChild(questionDiv);
+    });
+
+    function showResult() {
+      userScore = 0;
+      quizData.forEach((item, index) => {
+        const userAnswer = document.getElementById(`q${index}`).value.trim().toLowerCase();
+        if (userAnswer === item.a.toLowerCase()) {
+          userScore++;
+        }
+      });
+
+      let message = "";
+      if (userScore >= 13) message = "Você é um cristalzinho fã da Sabrina! Ela te adotaria com certeza.";
+      else if (userScore >= 9) message = "Você ama a Sabrina, mesmo que erre uma ou outra. Ícone reconhece ícone.";
+      else if (userScore >= 5) message = "Você conhece a fada, mas precisa ouvir mais uns álbuns e ler umas letras.";
+      else message = "Fofa você é, mas precisa conhecer melhor a rainha Sabrina Carpenter!";
+
+      document.getElementById("result").innerHTML = `<h2>Resultado: ${userScore}/15</h2><p>${message}</p>`;
+    }
+  </script>
+</body>
+</html>
